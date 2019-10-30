@@ -4,3 +4,4 @@
 
 Didn't gitignore node_modules as you don't have npm knowledge yet :)
 
+More on threejs on https://threejs.org/examples
