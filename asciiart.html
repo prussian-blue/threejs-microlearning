@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+        
+        html,
+        body {
+            overflow: hidden;
+        }
+    </style>
+    <style>
+        html, body {
+            overflow: hidden;
+            background: black;
+        }
+    </style>
+    <script src="node_modules/three/build/three.js"></script>
+    <script src="node_modules/three/examples/js/effects/AsciiEffect.js"></script>
+    <script src="node_modules/three/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        let camera, scene, renderer;
+        let geometry, material, mesh;
+    
+        init();
+        animate();
+    
+        function init() {
+            camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 10);
+            camera.position.z = 1;
+    
+            scene = new THREE.Scene();
+    
+            geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+            material = new THREE.MeshNormalMaterial();
+    
+            mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+    
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            // document.body.appendChild(renderer.domElement);
+
+            effect = new THREE.AsciiEffect(renderer, '#*', { invert: true });
+            effect.setSize(window.innerWidth, window.innerHeight);
+            effect.domElement.style.color = 'white';
+            effect.domElement.style.backgroundColor = 'black';
+            
+            
+
+            controls = new THREE.OrbitControls(camera, effect.domElement);
+            //controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
+            controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+            controls.dampingFactor = 0.25;
+            // controls.screenSpacePanning = false;
+            // controls.minDistance = 100;
+            // controls.maxDistance = 500;
+            controls.maxPolarAngle = Math.PI;
+
+            document.body.appendChild( effect.domElement );
+        }
+    
+        function animate() {
+            requestAnimationFrame(animate);
+    
+            // mesh.rotation.x += 0.01;
+            //mesh.rotation.y += 0.02;
+    
+            effect.render(scene, camera);
+        }
+    </script>
+</body>
+</html>

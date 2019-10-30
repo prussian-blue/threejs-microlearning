@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+    />
+    <style>
+      html,
+      body {
+        overflow: hidden;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.js"></script>
+    <script>
+      let camera, scene, renderer;
+      let geometry, material, mesh;
+      let speed = 0.01 * 5;
+      let meshes;
+      let cameraZ = 2;
+
+      init();
+      animate();
+
+      function init() {
+        camera = new THREE.PerspectiveCamera(
+          70,
+          window.innerWidth / window.innerHeight,
+          0.01,
+          10
+        );
+        camera.position.z = cameraZ;
+
+        scene = new THREE.Scene();
+
+        function randomFloat(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        meshes = Array(30)
+          .fill()
+          .map(() => {
+            geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+            material = new THREE.MeshNormalMaterial();
+
+            let mesh = new THREE.Mesh(geometry, material);
+            mesh.position.x = randomFloat(-1, 1);
+            mesh.position.y = randomFloat(-1, 1);
+            mesh.rotation.y = randomFloat(0, 2 * Math.PI);
+
+            return mesh;
+          });
+
+        meshes.forEach(mesh => scene.add(mesh));
+
+        scene.background = new THREE.Color("black");
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.gammaFactor = 2.2;
+        renderer.gammaOutput = true;
+        document.body.appendChild(renderer.domElement);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // mesh.rotation.x += speed;
+        // mesh.rotation.y += speed;
+        // mesh.rotation.z += speed;
+
+        cameraZ -= 0.01;
+        camera.position.z = cameraZ;
+
+        renderer.render(scene, camera);
+      }
+    </script>
+  </body>
+</html>
