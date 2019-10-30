@@ -15,13 +15,14 @@
       html,
       body {
         overflow: hidden;
+        background: black;
       }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.js"></script>
     <script>
       let camera, scene, renderer;
       let geometry, material, mesh;
-      let speed = 0.01 * 5;
+      let speed = 0.01;
       let meshes;
       let cameraZ = 2;
 
@@ -46,10 +47,17 @@
         meshes = Array(30)
           .fill()
           .map(() => {
-            let complexity = 10
-            geometry = new THREE.SphereGeometry(randomFloat(0.1, 0.5), complexity, complexity);
-            material = new THREE.MeshBasicMaterial( {wireframe: true, color: 0xff0000} );
-            
+            let complexity = 10;
+            geometry = new THREE.SphereGeometry(
+              randomFloat(0.1, 0.5),
+              complexity,
+              complexity
+            );
+            material = new THREE.MeshBasicMaterial({
+              wireframe: true,
+              color: 0xff0000
+            });
+
             let mesh = new THREE.Mesh(geometry, material);
             mesh.position.x = randomFloat(-1, 1);
             mesh.position.y = randomFloat(-1, 1);
@@ -71,9 +79,11 @@
       function animate() {
         requestAnimationFrame(animate);
 
-        // mesh.rotation.x += speed;
-        // mesh.rotation.y += speed;
-        // mesh.rotation.z += speed;
+        meshes.forEach(mesh => {
+          mesh.rotation.x += speed;
+          mesh.rotation.y += speed;
+          mesh.rotation.z += speed;
+        });
 
         // cameraZ -= 0.01;
         // camera.position.z = cameraZ;
