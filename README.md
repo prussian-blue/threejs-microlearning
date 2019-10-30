@@ -2,5 +2,5 @@
 
 # Install
 
-Didn't gigignore node_modules as you don't have npm knowledge yet :)
+Didn't gitignore node_modules as you don't have npm knowledge yet :)
 
