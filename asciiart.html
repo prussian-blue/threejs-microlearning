@@ -21,9 +21,9 @@
             background: black;
         }
     </style>
-    <script src="../node_modules/three/build/three.js"></script>
-    <script src="../node_modules/three/examples/js/effects/AsciiEffect.js"></script>
-    <script src="../node_modules/three/examples/js/controls/OrbitControls.js"></script>
+    <script src="node_modules/three/build/three.js"></script>
+    <script src="node_modules/three/examples/js/effects/AsciiEffect.js"></script>
+    <script src="node_modules/three/examples/js/controls/OrbitControls.js"></script>
     <script>
         let camera, scene, renderer;
         let geometry, material, mesh;
@@ -47,7 +47,7 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             // document.body.appendChild(renderer.domElement);
 
-            effect = new THREE.AsciiEffect(renderer, '#*', { invert: true });
+            effect = new THREE.AsciiEffect(renderer, '#£$', { invert: true });
             effect.setSize(window.innerWidth, window.innerHeight);
             effect.domElement.style.color = 'white';
             effect.domElement.style.backgroundColor = 'black';

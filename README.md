@@ -13,6 +13,13 @@ And then you can use your browser to navigate to all examples
 * ASCII art: http://127.0.0.1:8080/asciiart.html
 * Random spheres: http://127.0.0.1:8080/spheres.html
 
+Some cool examples we saw in the class:
+
+* http://wildflower.resn.co.nz/
+* http://letsplay.ouigo.com/
+* https://particle-love.com/
+* https://threejs.org/examples/#webgl_postprocessing_unreal_bloom_selective
+
 More on threejs on https://threejs.org/examples
 
 Many thanks for coming guys! You rock ⭐️

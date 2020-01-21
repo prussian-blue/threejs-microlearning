@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+    />
+    <style>
+      html,
+      body {
+        overflow: hidden;
+        background-color: black;
+      }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.js"></script>
+    <script>
+      let camera, scene, renderer;
+      let geometry, material, mesh;
+      let meshes = []
+
+      init();
+      animate();
+
+      function init() {
+        camera = new THREE.PerspectiveCamera(
+          70,
+          window.innerWidth / window.innerHeight,
+          0.01,
+          10
+        );
+        camera.position.z = 10;
+
+        scene = new THREE.Scene();
+
+        
+
+        for (let i = 0; i < 200; i++) {
+          geometry = new THREE.SphereGeometry(Math.random(), 0.2, 0.2);
+          material = new THREE.MeshBasicMaterial({
+            wireframe: true,
+            color: 0xff0000
+          });
+
+          mesh = new THREE.Mesh(geometry, material);
+          mesh.position.x = Math.random() * 2
+          mesh.position.y = Math.random() * 2
+          mesh.position.z = Math.random() * 2
+
+          meshes.push(mesh)
+          
+          scene.add(mesh);
+        }
+
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.gammaFactor = 1.2;
+        renderer.gammaOutput = true;
+        document.body.appendChild(renderer.domElement);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        meshes.forEach((mesh) => {
+            mesh.rotation.x += 0.02
+            mesh.rotation.y += 0.02
+            mesh.rotation.z += 0.02
+        })
+
+        // mesh.rotation.x += 0.01;
+        mesh.rotation.y += 0.002;
+        // mesh.rotation.z += 0.02;
+
+        camera.position.z-=.01;
+
+        renderer.render(scene, camera);
+      }
+    </script>
+  </body>
+</html>
